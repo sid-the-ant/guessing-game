@@ -21,13 +21,15 @@ echo 'Welcome! How many files are present in this directory?'
 
 while [[ ! $a -eq $guess ]]
 do
-	read -p "Enter your guess $num: " guess
-	if [[ $guess ]] && [ $guess -eq $guess 2>/dev/null ]
+	read -p "Enter your guess : " guess
+
+	#To check whether input is number or not
+	if ! [[ "$guess" =~ ^[0-9]+$ ]]
   	then
-     		check-answer $guess
-  	else
-     		echo -e "\n$guess is not an integer or not defined! Please Recheck!\n"
+     		echo -e "\n$guess is not an integer! Please Recheck!\n"
 		guess=-1
+	else
+		check-answer $guess
 	fi
 done
 
