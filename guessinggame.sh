@@ -14,7 +14,7 @@ function check-answer
 	fi
 }
 
-a=$( ls -a | wc -w )
+a=$( ls -a | egrep -v '^\.{0,1}\.$' | wc -w )
 guess=-1
 
 echo 'Welcome! How many files are present in this directory?'
