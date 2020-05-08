@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+# Script: guessinggame.sh
+
 function check-answer
 {
 	if [[ $guess -gt $a ]]
@@ -11,12 +14,21 @@ function check-answer
 	fi
 }
 
-a=$( ls | wc -l )
+a=$( ls -a | wc -w )
 guess=-1
+
+echo 'Welcome! How many files are present in this directory?'
+
 while [[ ! $a -eq $guess ]]
 do
 	read -p "Enter your guess $num: " guess
-	check-answer $guess
+	if [[ $guess ]] && [ $guess -eq $guess 2>/dev/null ]
+  	then
+     		check-answer $guess
+  	else
+     		echo -e "\n$guess is not an integer or not defined! Please Recheck!\n"
+		guess=-1
+	fi
 done
 
 
