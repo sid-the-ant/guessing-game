@@ -14,15 +14,14 @@ function check-answer
 	fi
 }
 
-a=$( ls -a | egrep -v '^\.{0,1}\.$' | wc -w )
+a=$( ls -a -I . -I .. | wc -l )
 guess=-1
-
 echo 'Welcome! How many files are present in this directory?'
 
 while [[ ! $a -eq $guess ]]
 do
-	read -p "Enter your guess : " guess
-
+	read -p "Enter your guess : " guesstemp
+	guess=$(echo $guesstemp | sed 's/^0*//')
 	#To check whether input is number or not
 	if ! [[ "$guess" =~ ^[0-9]+$ ]]
   	then
